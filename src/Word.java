@@ -4,10 +4,6 @@ public final class Word  {
 	private final int totalLetters;  // number of letters in the word
 	private final String word;  // the word
 
-	/**
-	 * 
-	 * @param s
-	 */
 	public Word(String s) { // construct an entry from a string
 		word = s;
 		int total = 0;
@@ -27,22 +23,11 @@ public final class Word  {
 		totalLetters = total;
 		assert wellFormed();
 	}
-	
-/**
- * 
- * @param j
- * @return
- */
+
 	public boolean containsLetter(int j){
 		return letterCount[j] != 0;
 	}
-	
-/**
- * 
- * @param word
- * @param leastCommonLetter
- * @return
- */
+
 	public int MultiFieldCompare(Word word, int leastCommonLetter)
 	{
 		if ( (containsLetter(leastCommonLetter) ) &&  !(word.containsLetter(leastCommonLetter)) )
@@ -59,9 +44,6 @@ public final class Word  {
 		return (getWord()).compareTo(word.getWord());
 	}
 
-	/**
-	 * 
-	 */
 	public String toString() {
 		String s = "";
 		for (int i = 0; i < letterCount.length; i++) {
@@ -72,35 +54,18 @@ public final class Word  {
 		return s;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
 	public int getTotalLetters() {
 		return totalLetters;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public String getWord() {
 		return word;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
 	public int[] getLetterCount() {
 		return letterCount;
 	}
 	
-	/**
-	 * 
-	 * @param index
-	 * @return
-	 */
 	public int getLetterCount(int index) {
 		return letterCount[index];
 	}

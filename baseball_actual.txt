@@ -1,3 +1,26 @@
+Candiate words:
+aal,  aals,  aas,  aba, 
+abas,  abase,  abba,  abbas, 
+abbe,  abbes,  able,  ables, 
+ala,  alae,  alas,  alb, 
+alba,  albas,  albs,  ale, 
+ales,  all,  alls,  als, 
+asea,  baa,  baal,  baals, 
+baas,  baba,  babas,  babe, 
+babel,  babes,  bal,  balas, 
+bale,  bales,  ball,  balls, 
+bals,  balsa,  bas,  basal, 
+base,  baseball,  bel,  bell, 
+bells,  bels,  blab,  blabs, 
+blae,  blase,  bleb,  blebs, 
+ebb,  ebbs,  ell,  ells, 
+els,  lab,  label,  labs, 
+las,  lase,  lea,  leal, 
+leas,  sab,  sabe,  sable, 
+sae,  sal,  salal,  sale, 
+sall,  sea,  seal,  sel, 
+sell,  slab,  
+
 Anagrams of baseball:
 albas bel 
 abbas ell 

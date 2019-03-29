@@ -3,7 +3,7 @@ import java.util.List;
 
 public class AnagramList extends WordList {
 	
-	List anagrams = new LinkedList();
+	List<String> anagrams = new LinkedList<>();
 	int minimumLength = 3;
 	String word;
 

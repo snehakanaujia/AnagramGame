@@ -1,18 +1,14 @@
 import java.io.*;
 
 public class WordList {
-	protected Word[] dictionary = new Word[UsefulConstants.MAXWORDS];
-	protected int totalWords=0;
+	private Word[] Dictionary = new Word[UsefulConstants.MAXWORDS];
+	private int totalWords=0;
 
 	public WordList(String fileName) {
 		readDict(fileName);
 		assert wellFormed();
 	}
 
-	/**
-	 * 
-	 * @param fileName
-	 */
 	private void readDict (String fileName) {
 		FileInputStream fis;
 		try {
@@ -30,7 +26,7 @@ public class WordList {
 					buffer[i++] = (char) readChar;
 				}
 				s = new String(buffer,0,i);
-				dictionary[totalWords] = new Word(s);
+				Dictionary[totalWords] = new Word(s);
 				totalWords++;
 			}
 			System.err.println("main dictionary has " + totalWords + " entries.");
@@ -45,31 +41,18 @@ public class WordList {
 		}
 	}
 
-	/**
-	 * 
-	 * @param index
-	 * @return
-	 */
 	public Word getWord (int index) {
-		return dictionary[index];
+		return Dictionary[index];
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public int getTotalWords() {
 		return totalWords;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public boolean wellFormed() {
 		int counter = 0;
-		for(int i = 0; i < dictionary.length; i++) {
-			if(dictionary[i] != null) {
+		for(int i = 0; i < Dictionary.length; i++) {
+			if(Dictionary[i] != null) {
 				counter++;
 			}
 		}
