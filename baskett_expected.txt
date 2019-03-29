@@ -1,0 +1,17 @@
+Anagrams of baskett:
+abet tsk 
+sett kab 
+stet kab 
+test kab 
+tets kab 
+best kat 
+beta tsk 
+bate tsk 
+bets kat 
+beat tsk 
+bet skat 
+bet task 
+bet kats 
+tet kabs 
+tet bask 
+----baskett----
