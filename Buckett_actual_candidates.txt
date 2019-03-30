@@ -1,0 +1,7 @@
+Candiate words:
+beck,  bet,  buck,  but, 
+butt,  cub,  cube,  cue, 
+cuke,  cut,  cute,  ecu, 
+kue,  tet,  tub,  tube, 
+tuck,  tut,  uke,  
+

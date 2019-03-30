@@ -1,0 +1,119 @@
+Candiate words:
+state,  stoat,  stoae,  taste, 
+teats,  ottos,  testa,  tates, 
+toast,  totes,  toots,  seat, 
+stet,  stoa,  seta,  stat, 
+sett,  sate,  soot,  taos, 
+tats,  teas,  oots,  teat, 
+oast,  test,  etas,  east, 
+tate,  tets,  oats,  toea, 
+tost,  tots,  toes,  toot, 
+tote,  eats,  otto,  ates, 
+eta,  sae,  set,  sat, 
+sot,  sea,  tea,  oes, 
+tot,  tae,  tet,  tas, 
+oot,  tat,  eat,  tao, 
+toe,  ose,  too,  ate, 
+oat,  stoop,  stope,  spate, 
+septa,  stopt,  tepas,  paseo, 
+paste,  pates,  pesto,  topes, 
+psoae,  topos,  poets,  potto, 
+peats,  petto,  tapes,  estop, 
+soap,  step,  apse,  atop, 
+oops,  sept,  spot,  spae, 
+stop,  spat,  tepa,  opes, 
+opts,  pase,  past,  pats, 
+peas,  peat,  post,  pose, 
+pots,  apes,  taps,  tape, 
+pest,  tops,  tope,  pate, 
+peso,  pets,  poet,  epos, 
+ops,  apt,  sap,  sop, 
+spa,  tap,  potatoes,  ope, 
+opt,  pas,  pat,  ape, 
+pes,  pet,  asp,  pea, 
+top,  pot,  
+Anagrams of Potatoes:
+stoat ope 
+stoae opt 
+stoae top 
+stoae pot 
+ottos ape 
+ottos pea 
+toast ope 
+toots ape 
+toots pea 
+stoa tope 
+stoa poet 
+soot tepa 
+soot peat 
+soot tape 
+soot pate 
+taos tope 
+taos poet 
+oots tepa 
+oots peat 
+oots tape 
+oots pate 
+teat oops 
+oast tope 
+oast poet 
+tate oops 
+oats tope 
+oats poet 
+toea spot 
+toea stop 
+toea opts 
+toea post 
+toea pots 
+toea tops 
+toes atop 
+toot apse 
+toot spae 
+toot pase 
+toot peas 
+toot apes 
+tote soap 
+otto apse 
+otto spae 
+otto pase 
+otto peas 
+otto apes 
+eta stoop 
+eta topos 
+sae potto 
+sea potto 
+tea stoop 
+tea topos 
+tot paseo 
+tot psoae 
+tae stoop 
+tae topos 
+oot spate 
+oot septa 
+oot tepas 
+oot paste 
+oot pates 
+oot peats 
+oot tapes 
+eat stoop 
+eat topos 
+tao stope 
+tao pesto 
+tao topes 
+tao poets 
+tao estop 
+too spate 
+too septa 
+too tepas 
+too paste 
+too pates 
+too peats 
+too tapes 
+ate stoop 
+ate topos 
+oat stope 
+oat pesto 
+oat topes 
+oat poets 
+oat estop 
+----Potatoes----

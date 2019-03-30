@@ -1,0 +1,5 @@
+Candiate words:
+bet,  bucket,  but,  cub, 
+cue,  cut,  ecu,  kue, 
+tub,  uke,  
+
