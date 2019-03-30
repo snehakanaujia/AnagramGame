@@ -199,7 +199,7 @@ public class anagram {
 		swap(left, (left+right)/2);
 		last = left;
 		for (i=left+1; i <=right; i++)  /* partition */
-			if (Candidate[i].multiFieldCompare ( Candidate[left], leastCommonIndex ) ==  -1 )
+			if (Candidate[i].multiFieldCompare( Candidate[left], leastCommonIndex ) ==  -1 )
 				swap( ++last, i);
 		
 		swap(last, left);
