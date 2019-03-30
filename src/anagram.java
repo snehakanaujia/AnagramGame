@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -26,10 +25,11 @@ public class anagram {
 
 		// word filename is optional 3rd argument
 		AnagramList anagrams = new AnagramList( argv.length == 3 ? argv[2] : "words.txt", argv[0]);
-		List anagramList = anagrams.getAnagrams();
+		List<String> anagramList = anagrams.getAnagrams();
 
-		System.out.println("Candiate words: ");
-		System.out.println(anagrams.getCandidatesString());
+		System.out.println("Candiate words:");
+		System.out.println(anagrams.getCandidateString());
+		System.out.println("");
 		System.out.println("Anagrams of " + argv[0] + ":");
 		for(int i = 0; i < anagramList.size(); i++) {
 			System.out.print(anagramList.get(i));

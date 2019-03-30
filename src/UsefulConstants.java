@@ -1,10 +1,4 @@
 /**
- * 
- */
-
-import java.io.*;
-
-/**
  * @author Peter van der Linden
  * @version Jan 7, 1996
  *

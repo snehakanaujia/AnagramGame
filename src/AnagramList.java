@@ -3,27 +3,19 @@ import java.util.List;
 
 public class AnagramList extends WordList {
 
-	List anagrams = new LinkedList();
+	List<String> anagrams = new LinkedList<>();
 	int minimumLength = 3;
-	String word;
+	private String word, savedCandidates;
 
 	public AnagramList(String fileName, String targetWord) {
 		super(fileName);
 		word = targetWord;
-		initAnagrams();
-	}
-
-	/**
-	 * 
-	 * @param anag
-	 */
-	private void initAnagrams()
-	{
 		Word myAnagram = new Word(word);
 
 		getCandidates(myAnagram);
+		savedCandidates = generateCandidateString();
 
-		int RootIndexEnd = sortdictionarys(myAnagram);
+		int RootIndexEnd = sortCandidates(myAnagram);
 
 		findAnagram(myAnagram, new String[UsefulConstants.MAXWORDLEN],  0, 0, RootIndexEnd);
 	}
@@ -62,7 +54,7 @@ public class AnagramList extends WordList {
 	/**
 	 * 
 	 */
-	public String getCandidatesString()
+	private String generateCandidateString()
 	{
 		StringBuilder sb = new StringBuilder();
 
@@ -70,6 +62,10 @@ public class AnagramList extends WordList {
 			sb.append( dictionary[i].getWord() + ", " + ((i%4 ==3) ?"\n":" " ) );
 
 		return sb.toString();
+	}
+	
+	public String getCandidateString() {
+		return savedCandidates;
 	}
 
 	/**
@@ -141,7 +137,7 @@ public class AnagramList extends WordList {
 	 * @param word
 	 * @return
 	 */
-	private int sortdictionarys(Word word)
+	private int sortCandidates(Word word)
 	{
 		int[] MasterCount=new int[26];
 		int LeastCommonIndex=0, LeastCommonCount;
@@ -207,7 +203,7 @@ public class AnagramList extends WordList {
 	 * 
 	 * @return
 	 */
-	public List getAnagrams() {
+	public List<String> getAnagrams() {
 		return anagrams;
 	}
 }
