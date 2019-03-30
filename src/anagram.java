@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -27,36 +28,6 @@ public class anagram {
 		// word filename is optional 3rd argument
 		Dictionary = new WordList( argv.length==3? argv[2] : "words.txt" );
 		initAnagrams(argv[0]);
-//		AnagramList anagrams = new AnagramList( argv.length == 3 ? argv[2] : "words.txt", argv[0]);
-//		List anagramList = anagrams.getAnagrams();
-//		
-//		anagrams.printCandidates();
-//		System.out.println("Anagrams of " + argv[0] + ":");
-//		for(int i = 0; i < anagramList.size(); i++) {
-//			System.out.print(anagramList.get(i));
-//			System.out.println("");
-//		}
-//		System.out.println("----" + argv[0] + "----");
-		
-		
-		/*
-	private static Word[] Candidate = new Word[UsefulConstants.MAXWORDS];
-	private static WordList Dictionary;
-	private static int totalCandidates = 0, minimumLength = 3;
-	
-	public static void main(String[] argv) {
-		if (argv.length < 1 || argv.length > 3) {
-			System.err.println("Usage: java anagram  string-to-anagram " + "[min-len [word-file]]");
-			return;
-		}
-		
-		if (argv.length >= 2)
-			minimumLength = Integer.parseInt(argv[1]);
-		
-		// word filename is optional 3rd argument
-		Dictionary = new WordList( argv.length==3? argv[2] : "words.txt" );
-		initAnagrams(argv[0]);
-	}*/
 	}
 	
 	/**
@@ -68,6 +39,7 @@ public class anagram {
 		Word myAnagram = new Word(anag);
 		
 		getCandidates(myAnagram);
+		
 		printCandidate();
 		
 		int RootIndexEnd = sortCandidates(myAnagram);
@@ -107,11 +79,11 @@ public class anagram {
 	/**
 	 * 
 	 */
-	private static void printCandidate()
+	static void printCandidate()
 	{
 		System.out.println("Candiate words:");
 		for (int i=0; i < totalCandidates; i++)
-			System.out.print( Candidate[i].getWord() + ", " + ((i%4 ==3) ?"\n":" " ) );
+			System.out.print( Candidate[i].getWord() + ", " + ((i%4 ==3) ? "\n" : " " ) );
 		System.out.println("");
 		System.out.println();
 	}
@@ -169,7 +141,7 @@ public class anagram {
 		int[] candidateLetterCount = candidate.getLetterCount();
 		String s = "";
 		for (int y = 25; y >= 0; y--) {
-			int r = wordLetterCount[y] - candidateLetterCount[y];
+			int r = (byte) (wordLetterCount[y] - candidateLetterCount[y]);
 			for(int i = 0; i < r; i++) {
 				s += (char) (y + 'a');
 			}
@@ -219,7 +191,7 @@ public class anagram {
 	 * @param right
 	 * @param leastCommonLetter
 	 */
-	private static void quickSort(int left, int right, int leastCommonLetter)
+	static void quickSort(int left, int right, int leastCommonIndex)
 	{
 		// standard quicksort from any algorithm book
 		int i, last;
@@ -227,20 +199,15 @@ public class anagram {
 		swap(left, (left+right)/2);
 		last = left;
 		for (i=left+1; i <=right; i++)  /* partition */
-			if (Candidate[i].MultiFieldCompare ( Candidate[left], leastCommonLetter ) ==  -1 )
+			if (Candidate[i].multiFieldCompare ( Candidate[left], leastCommonIndex ) ==  -1 )
 				swap( ++last, i);
 		
 		swap(last, left);
-		quickSort(left, last-1, leastCommonLetter);
-		quickSort(last+1,right, leastCommonLetter);
+		quickSort(left, last-1, leastCommonIndex);
+		quickSort(last+1,right, leastCommonIndex);
 	}
 	
-	/**
-	 * 
-	 * @param d1
-	 * @param d2
-	 */
-	private static void swap(int d1, int d2) {
+	static void swap(int d1, int d2) {
 		Word tmp = Candidate[d1];
 		Candidate[d1] = Candidate[d2];
 		Candidate[d2] = tmp;

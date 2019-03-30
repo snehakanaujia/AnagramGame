@@ -21,8 +21,9 @@ public class WordList {
 			while (readChar!= UsefulConstants.EOF) {
 				int i = 0;
 				// read a word in from the word file
-				while ( (readChar=fis.read()) != UsefulConstants.EOF ) {
-					if ( readChar == '\n' ) break;
+				while ( (readChar=fis.read()) != UsefulConstants.EOF) {
+					if ( readChar == '\n' )
+						break;
 					buffer[i++] = (char) readChar;
 				}
 				s = new String(buffer,0,i);

@@ -5,7 +5,7 @@ public final class Word  {
 	private final String word;  // the word
 
 	public Word(String s) { // construct an entry from a string
-		word = s;
+		word = s.replaceAll("\\r|\\n", "");
 		int total = 0;
 		s = word.toLowerCase();
 		
@@ -28,7 +28,7 @@ public final class Word  {
 		return letterCount[j] != 0;
 	}
 
-	public int MultiFieldCompare(Word word, int leastCommonLetter)
+	public int multiFieldCompare(Word word, int leastCommonLetter)
 	{
 		if ( (containsLetter(leastCommonLetter) ) &&  !(word.containsLetter(leastCommonLetter)) )
 			return 1;
@@ -88,6 +88,9 @@ public final class Word  {
 		if(counter > word.length()) {
 			return false;
 		}
+		
+//		if(word.indexOf('\n') != -1 || word.indexOf('\r') != -1)
+//			return false;
 		
 		return true;
 	}
