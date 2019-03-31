@@ -1,14 +1,26 @@
 import java.io.*;
 
 public class WordList {
+	//Dictionary array that holds words
 	private Word[] dictionary = new Word[UsefulConstants.MAXWORDS];
+	
+	//Total words in the dictionary
 	private int totalWords=0;
 
+	/**
+	 * WordList constructor that calls a method to read in a text file that has words to store in the dictionary array.
+	 * @param f is the name of file to be read in
+	 */
 	public WordList(String fileName) {
 		readDict(fileName);
 		assert wellFormed();
 	}
 
+	/**
+	 * Reads in a text file that has words to store in the dictionary array. The file is not
+	 * meant to have more than 10000 words in it or an IndexOutOfBounds error will likely be thrown.
+	 * @param f is the name of file to be read in
+	 */
 	private void readDict (String fileName) {
 		FileInputStream fis;
 		try {
@@ -42,20 +54,25 @@ public class WordList {
 		}
 	}
 
+	/**
+	 * Gets the words in the dictionary.
+	 * @param index in the dictionary arrray where a word is located 
+	 * @return the word at the given index in the dictionary array
+	 */
 	public Word getWord (int index) {
 		return dictionary[index];
 	}
 
 	/**
-	 * Get the total words in the dictionary.
-	 * @return total word count
+	 * Gets the total words in the dictionary.
+	 * @return totalWords count
 	 */
 	public int getTotalWords() {
 		return totalWords;
 	}
 
 	/**
-	 * Dictionary must have:
+	 * The dictionary must have:
 	 * 	1) An instantiated dictionary
 	 * 	2) totalWords counter should be the length of the dictionary for it to be correct
 	 * @return true if the dictionary is wellFormed, if not, return false
