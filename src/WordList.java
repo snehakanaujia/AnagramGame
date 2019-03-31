@@ -1,7 +1,7 @@
 import java.io.*;
 
 public class WordList {
-	private Word[] Dictionary = new Word[UsefulConstants.MAXWORDS];
+	private Word[] dictionary = new Word[UsefulConstants.MAXWORDS];
 	private int totalWords=0;
 
 	public WordList(String fileName) {
@@ -27,7 +27,7 @@ public class WordList {
 					buffer[i++] = (char) readChar;
 				}
 				s = new String(buffer,0,i);
-				Dictionary[totalWords] = new Word(s);
+				dictionary[totalWords] = new Word(s);
 				totalWords++;
 			}
 			System.err.println("main dictionary has " + totalWords + " entries.");
@@ -43,17 +43,33 @@ public class WordList {
 	}
 
 	public Word getWord (int index) {
-		return Dictionary[index];
+		return dictionary[index];
 	}
 
+	/**
+	 * Get the total words in the dictionary.
+	 * @return total word count
+	 */
 	public int getTotalWords() {
 		return totalWords;
 	}
 
+	/**
+	 * Dictionary must have:
+	 * 	1) An instantiated dictionary
+	 * 	2) totalWords counter should be the length of the dictionary for it to be correct
+	 * @return true if the dictionary is wellFormed, if not, return false
+	 */
 	public boolean wellFormed() {
+		//Checks that dictionary is not null
+		if(dictionary == null) {
+			return false;
+		}
+		
+		//Checks that the total word counter is correct (matches length of dictionary array)
 		int counter = 0;
-		for(int i = 0; i < Dictionary.length; i++) {
-			if(Dictionary[i] != null) {
+		for(int i = 0; i < dictionary.length; i++) {
+			if(dictionary[i] != null) {
 				counter++;
 			}
 		}
