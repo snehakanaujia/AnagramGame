@@ -6,10 +6,17 @@ import java.util.List;
  */
 public class AnagramList{
 
+	// Minimum length of a word
 	private final int minimumLength;
+	
+	// Variables to hold the word anagrams are being generated from as well as an anagram candidate variable
 	private String word, savedCandidates;
+	
+	// Word list with read-in file of words
 	private WordList dictionary;
+	// Finalized list of anagrams that can be made from all the target word's letters
 	private List<String> anagrams;
+	// Array of candidate anagrams, or all the words that can be made from the letters of the given targetWord
 	private Word[] candidates;
 
 	/**
@@ -129,9 +136,10 @@ public class AnagramList{
 	 * @param word
 	 * @return
 	 */
-	private int sortCandidates(Word word)
-	{
+	private int sortCandidates(Word word) {
+		//Keeps track of the frequency of each letter is in each word
 		int[] MasterCount=new int[26];
+		//Keeps track of which index/letter in the array has the fewest letters 
 		int LeastCommonIndex=0, LeastCommonCount;
 		int i, j;
 
