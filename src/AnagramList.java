@@ -136,34 +136,33 @@ public class AnagramList{
 	 * @param word
 	 * @return
 	 */
-	private int sortCandidates(Word word) {
-		//Keeps track of the frequency of each letter is in each word
-		int[] MasterCount=new int[26];
-		//Keeps track of which index/letter in the array has the fewest letters 
-		int LeastCommonIndex=0, LeastCommonCount;
-		int i, j;
-
-		for (j = 25; j >= 0; j--) MasterCount[j] = 0;
-		for (i = candidates.length-1; i >=0; i--)
-			for (j = 25; j >=0; j--)
-				MasterCount[j] += candidates[i].getLetterCount(j);
-
-		LeastCommonCount = Integer.MAX_VALUE;
-		for (j = 25; j >= 0; j--)
-			if (    MasterCount[j] != 0
-				 && MasterCount[j] < LeastCommonCount
-				 && word.containsLetter(j)  ) {
-				LeastCommonCount = MasterCount[j];
-				LeastCommonIndex = j;
+	private int sortCandidates(Word word)
+	{
+		// Keeps track of the frequency of each letter is in each word
+		int[] masterCount=new int[26];
+		// Keeps track of which index/letter in the array has the fewest letters
+		int leastcommonIndex=0, leastCommonCount = 30;
+		
+		// Goes through each candidate word
+		for (int i = candidates.length-1; i >=0; i--)
+			// Goes through each letter of the cadidate word
+			for (int j = 25; j >=0; j--) {
+				// Adds the candidate list letter counts to the masterCount
+				masterCount[j] += candidates[i].getLetterCount(j);
+				/* Checks if the letter of the word is in masterCount and is less than leastCommonCount and the
+				 * candidate word also has this letter */
+				if ( masterCount[j] != 0 && masterCount[j] < leastCommonCount && word.containsLetter(j)  ) {
+					// updates the leastCommonCount with the lower masterCount value
+					leastCommonCount = masterCount[j];
+					/* Updates the leastCommonIndex to the index in leastCommonCount that has the least 
+					commonly used letter */
+					leastcommonIndex = j;
+				}
 			}
+		// Sorts the candidates
+		quickSort(0, candidates.length-1, leastcommonIndex );
 
-		quickSort(0, candidates.length-1, LeastCommonIndex );
-
-		for (i = 0; i < candidates.length; i++)
-			if (candidates[i].containsLetter(LeastCommonIndex))
-				break;
-
-		return i;
+		return leastcommonIndex;
 	}
 
 	/**
