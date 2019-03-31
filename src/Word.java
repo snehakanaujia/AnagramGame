@@ -40,10 +40,12 @@ public final class Word  {
 	}
 
 	/**
-	 * 
-	 * @param word
-	 * @param leastCommonLetter
-	 * @return
+	 * Compares this word to the passed in word, checking the leastCommonLetter
+	 * first.
+	 * @param word the word to compare to
+	 * @param leastCommonLetter the letter to check for
+	 * @return 0 if the words are equal, < 0 if word is greater than this one,
+	 * > 0 if word is less than this one
 	 */
 	public int multiFieldCompare(Word word, int leastCommonLetter)
 	{
