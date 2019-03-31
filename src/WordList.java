@@ -1,6 +1,9 @@
 import java.io.*;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
+<<<<<<< HEAD
  * WordList takes a text file in the readDict method and stores and counts all the words
  * from that file in an array. It can return a word from the dictionary array give an index number, and the total number of
  * words in the array.
@@ -74,6 +77,35 @@ public class WordList {
 	 */
 	public int getTotalWords() {
 		return totalWords;
+	}
+	
+	/**
+	 * 
+	 * @param target
+	 */
+	public Word[] getPartialMatches(Word target, int minimumLength) {
+		List<Word> candidates = new LinkedList<>();
+		for (int i = 0; i < totalWords; i++)
+			if (   (    dictionary[i].getTotalLetters() >= minimumLength   )
+				&& (    dictionary[i].getTotalLetters() + minimumLength <= target.getTotalLetters()
+					||  dictionary[i].getTotalLetters() == target.getTotalLetters())
+				&& ( fewerOfEachLetter(target, dictionary[i]) )  )
+				candidates.add(dictionary[i]);
+		assert wellFormed();
+		return candidates.toArray(new Word[candidates.size()]);
+	}
+
+	/**
+	 * 
+	 * @param target
+	 * @param entry
+	 * @return
+	 */
+	private boolean fewerOfEachLetter(Word target, Word entry)
+	{
+		for (int i = 25; i >=0; i--)
+			if (entry.getLetterCount(i) > target.getLetterCount(i)) return false;
+		return true;
 	}
 
 	/**

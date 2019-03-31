@@ -5,7 +5,7 @@ public final class Word  {
 	private final String word;  // the word
 
 	public Word(String s) { // construct an entry from a string
-		word = s.replaceAll("\\r|\\n", "");
+		word = s;//s.replaceAll("\\r|\\n", "");
 		int total = 0;
 		s = word.toLowerCase();
 		
