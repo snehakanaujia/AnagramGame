@@ -3,7 +3,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
-<<<<<<< HEAD
  * WordList takes a text file in the readDict method and stores and counts all the words
  * from that file in an array. It can return a word from the dictionary array give an index number, and the total number of
  * words in the array.

@@ -6,27 +6,35 @@ import java.util.List;
  */
 public class AnagramList{
 
-	private int minimumLength = 3;
+	private final int minimumLength;
 	private String word, savedCandidates;
 	private WordList dictionary;
 	private List<String> anagrams;
 	private Word[] candidates;
 
-	public AnagramList(WordList dictionary, String targetWord) {
+	/**
+	 * Generates a List of anagrams for the target word from the words
+	 * available in the dictionary.
+	 * @param dictionary list of words to find anagrams with
+	 * @param targetWord word to find anagrams for
+	 * @param minimumLength the min length for part of an anagram
+	 */
+	public AnagramList(WordList dictionary, String targetWord, int minimumLength) {
 		word = targetWord;
+		this.minimumLength = minimumLength;
 		Word myAnagram = new Word(word);
 		anagrams = new LinkedList<>();
 
 		/* Generate candidates and save a string record before sorting*/
-		candidates = dictionary.getPartialMatches(myAnagram, minimumLength);
+		candidates = dictionary.getPartialMatches(myAnagram, this.minimumLength);
 		savedCandidates = generateCandidateString();
 		/* Find anagrams */
 		int RootIndexEnd = sortCandidates(myAnagram);
-		findAnagram(myAnagram, new String[UsefulConstants.MAXWORDLEN],  0, 0, RootIndexEnd);
+		findAnagrams(myAnagram, new String[UsefulConstants.MAXWORDLEN],  0, 0, RootIndexEnd);
 	}
 
 	/**
-	 * 
+	 * Creates a String from the candidates array
 	 */
 	private String generateCandidateString()
 	{
@@ -38,19 +46,24 @@ public class AnagramList{
 		return sb.toString();
 	}
 	
+	/**
+	 * Returns a String representing the candidates array just after it was
+	 * created.
+	 * @return String candidates
+	 */
 	public String getCandidateString() {
 		return savedCandidates;
 	}
 
 	/**
-	 * 
-	 * @param word
-	 * @param anagramArray
-	 * @param level
-	 * @param startAt
-	 * @param endAt
+	 * Recursively finds anagrams for the word with the candidates array.
+	 * @param word Word to find Anagrams for
+	 * @param anagramArray current combination of words that fit into Word
+	 * @param level -- the current layer of recursion
+	 * @param startAt the place to start in the candidates array
+	 * @param endAt the place top stop in the candidates array
 	 */
-	private void findAnagram( Word word, String anagramArray[], int level, int startAt, int endAt) {
+	private void findAnagrams( Word word, String anagramArray[], int level, int startAt, int endAt) {
 		boolean enoughCommonLetters;
 
 		for (int i = startAt; i < endAt; i++) {
@@ -67,14 +80,15 @@ public class AnagramList{
 					/* Found a series of words! */
 					addAnagrams(anagramArray, level);
 				} else if (remainingLetters.getTotalLetters() >= minimumLength) {
-					findAnagram(remainingLetters, anagramArray, level+1,i, candidates.length);
+					findAnagrams(remainingLetters, anagramArray, level+1,i, candidates.length);
 				}
 			}
 		}
 	}
 
 	/**
-	 * 
+	 * Combine array of strings into a single string and save it in the final 
+	 * list of anagrams
 	 * @param anagramArray
 	 * @param endIndex
 	 */
