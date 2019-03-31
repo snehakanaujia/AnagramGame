@@ -1,54 +1,28 @@
 import java.util.LinkedList;
 import java.util.List;
 
-public class AnagramList extends WordList {
+/**
+ * A list of anagrams of a word.
+ */
+public class AnagramList{
 
-	List<String> anagrams = new LinkedList<>();
-	int minimumLength = 3;
+	private int minimumLength = 3;
 	private String word, savedCandidates;
+	private WordList dictionary;
+	private List<String> anagrams;
+	private Word[] candidates;
 
-	public AnagramList(String fileName, String targetWord) {
-		super(fileName);
+	public AnagramList(WordList dictionary, String targetWord) {
 		word = targetWord;
 		Word myAnagram = new Word(word);
+		anagrams = new LinkedList<>();
 
-		getCandidates(myAnagram);
+		/* Generate candidates and save a string record before sorting*/
+		candidates = dictionary.getPartialMatches(myAnagram, minimumLength);
 		savedCandidates = generateCandidateString();
-
+		/* Find anagrams */
 		int RootIndexEnd = sortCandidates(myAnagram);
-
 		findAnagram(myAnagram, new String[UsefulConstants.MAXWORDLEN],  0, 0, RootIndexEnd);
-	}
-
-	/**
-	 * 
-	 * @param target
-	 */
-	private void getCandidates(Word target) {
-		int totalCandidates;
-		Word[] candidates = new Word[UsefulConstants.MAXWORDS];
-		for (int i = totalCandidates = 0; i < totalWords; i++)
-			if (   (    dictionary[i].getTotalLetters() >= minimumLength   )
-				&& (    dictionary[i].getTotalLetters() + minimumLength <= target.getTotalLetters()
-					||  dictionary[i].getTotalLetters() == target.getTotalLetters())
-				&& ( fewerOfEachLetter(target, dictionary[i]) )  )
-				candidates[totalCandidates++]=dictionary[i];	
-		dictionary = candidates;
-		totalWords = totalCandidates;
-		assert wellFormed();
-	}
-
-	/**
-	 * 
-	 * @param target
-	 * @param entry
-	 * @return
-	 */
-	private boolean fewerOfEachLetter(Word target, Word entry)
-	{
-		for (int i = 25; i >=0; i--)
-			if (entry.getLetterCount(i) > target.getLetterCount(i)) return false;
-		return true;
 	}
 
 	/**
@@ -58,8 +32,8 @@ public class AnagramList extends WordList {
 	{
 		StringBuilder sb = new StringBuilder();
 
-		for (int i=0; i < totalWords; i++)
-			sb.append( dictionary[i].getWord() + ", " + ((i%4 ==3) ?"\n":" " ) );
+		for (int i=0; i < candidates.length; i++)
+			sb.append( candidates[i].getWord() + ", " + ((i%4 ==3) ?"\n":" " ) );
 
 		return sb.toString();
 	}
@@ -81,19 +55,19 @@ public class AnagramList extends WordList {
 
 		for (int i = startAt; i < endAt; i++) {
 			enoughCommonLetters = true;
-			// confirms *all* the letters in dictionary are also in word
+			// confirms *all* the letters in candidates are also in word
 			for (int x = 25; x >= 0 && enoughCommonLetters; x--) {
-				if (word.getLetterCount(x) < dictionary[i].getLetterCount(x))
+				if (word.getLetterCount(x) < candidates[i].getLetterCount(x))
 					enoughCommonLetters = false;
 			}
 			if (enoughCommonLetters) {
-				anagramArray[level] = dictionary[i].getWord();
-				Word remainingLetters = getRemainingLetters(word, dictionary[i]);
+				anagramArray[level] = candidates[i].getWord();
+				Word remainingLetters = getRemainingLetters(word, candidates[i]);
 				if (remainingLetters.getTotalLetters() == 0) {
 					/* Found a series of words! */
 					addAnagrams(anagramArray, level);
 				} else if (remainingLetters.getTotalLetters() >= minimumLength) {
-					findAnagram(remainingLetters, anagramArray, level+1,i, totalWords);
+					findAnagram(remainingLetters, anagramArray, level+1,i, candidates.length);
 				}
 			}
 		}
@@ -112,17 +86,20 @@ public class AnagramList extends WordList {
 	}
 
 	/**
-	 * 
-	 * @param word
-	 * @param dictionary
-	 * @return
+	 * Gets the remaining letters after the letters in candidate are removed
+	 * from word. Expects all letters in candidate to exist in word -- For each
+	 * letter in candidate, there exists at least as many instance of that
+	 * letter in word.
+	 * @param word the Word to have letters removed from it
+	 * @param candidate the Word to be removed
+	 * @return A new Word containing the result of word - candidate
 	 */
-	private Word getRemainingLetters(Word word, Word dictionary) {
+	private Word getRemainingLetters(Word word, Word candidate) {
 		int[] wordLetterCount = word.getLetterCount();
-		int[] dictionaryLetterCount = dictionary.getLetterCount();
+		int[] candidateLetterCount = candidate.getLetterCount();
 		String s = "";
 		for (int y = 25; y >= 0; y--) {
-			int r = wordLetterCount[y] - dictionaryLetterCount[y];
+			int r = wordLetterCount[y] - candidateLetterCount[y];
 			for(int i = 0; i < r; i++) {
 				s += (char) (y + 'a');
 			}
@@ -133,7 +110,8 @@ public class AnagramList extends WordList {
 	}
 
 	/**
-	 * 
+	 * Sorts the candidate Words by the least common letter shared with the
+	 * target Word. 
 	 * @param word
 	 * @return
 	 */
@@ -144,9 +122,9 @@ public class AnagramList extends WordList {
 		int i, j;
 
 		for (j = 25; j >= 0; j--) MasterCount[j] = 0;
-		for (i = totalWords-1; i >=0; i--)
+		for (i = candidates.length-1; i >=0; i--)
 			for (j = 25; j >=0; j--)
-				MasterCount[j] += dictionary[i].getLetterCount(j);
+				MasterCount[j] += candidates[i].getLetterCount(j);
 
 		LeastCommonCount = Integer.MAX_VALUE;
 		for (j = 25; j >= 0; j--)
@@ -157,30 +135,29 @@ public class AnagramList extends WordList {
 				LeastCommonIndex = j;
 			}
 
-		quickSort(0, totalWords-1, LeastCommonIndex );
+		quickSort(0, candidates.length-1, LeastCommonIndex );
 
-		for (i = 0; i < totalWords; i++)
-			if (dictionary[i].containsLetter(LeastCommonIndex))
+		for (i = 0; i < candidates.length; i++)
+			if (candidates[i].containsLetter(LeastCommonIndex))
 				break;
 
 		return i;
 	}
 
 	/**
-	 * 
+	 * Standard quicksort from any algorithm book
 	 * @param left
 	 * @param right
 	 * @param leastCommonLetter
 	 */
 	private void quickSort(int left, int right, int leastCommonLetter)
 	{
-		// standard quicksort from any algorithm book
 		int i, last;
 		if (left >= right) return;
 		swap(left, (left+right)/2);
 		last = left;
 		for (i=left+1; i <=right; i++)  /* partition */
-			if (dictionary[i].multiFieldCompare ( dictionary[left], leastCommonLetter ) ==  -1 )
+			if (candidates[i].multiFieldCompare ( candidates[left], leastCommonLetter ) ==  -1 )
 				swap( ++last, i);
 
 		swap(last, left);
@@ -189,19 +166,18 @@ public class AnagramList extends WordList {
 	}
 
 	/**
-	 * 
-	 * @param d1
-	 * @param d2
+	 * Switches the contents of two indexes of the candidates array.
+	 * @param d1 index 1 to swap
+	 * @param d2 index 2 to swap
 	 */
 	private void swap(int d1, int d2) {
-		Word tmp = dictionary[d1];
-		dictionary[d1] = dictionary[d2];
-		dictionary[d2] = tmp;
+		Word tmp = candidates[d1];
+		candidates[d1] = candidates[d2];
+		candidates[d2] = tmp;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * @return A List of anagrams of the word
 	 */
 	public List<String> getAnagrams() {
 		return anagrams;

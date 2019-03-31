@@ -1,5 +1,11 @@
 import java.io.*;
+import java.util.LinkedList;
+import java.util.List;
 
+/**
+ * A list of words pulled from a textfile.
+ *
+ */
 public class WordList {
 	protected Word[] dictionary = new Word[UsefulConstants.MAXWORDS];
 	protected int totalWords=0;
@@ -9,6 +15,11 @@ public class WordList {
 		assert wellFormed();
 	}
 
+	/**
+	 * Reads list of words from the specified file, if possible.
+	 * @throws RuntimeException
+	 * @param fileName
+	 */
 	private void readDict (String fileName) {
 		FileInputStream fis;
 		try {
@@ -42,12 +53,49 @@ public class WordList {
 		}
 	}
 
+	/**
+	 * @param index
+	 * @return Word at specified index in dictionary array
+	 */
 	public Word getWord (int index) {
 		return dictionary[index];
 	}
 
+	/**
+	 * 
+	 * @return Number of words in the WordList
+	 */
 	public int getTotalWords() {
 		return totalWords;
+	}
+	
+	/**
+	 * 
+	 * @param target
+	 */
+	public Word[] getPartialMatches(Word target, int minimumLength) {
+		List<Word> candidates = new LinkedList<>();
+		for (int i = 0; i < totalWords; i++)
+			if (   (    dictionary[i].getTotalLetters() >= minimumLength   )
+				&& (    dictionary[i].getTotalLetters() + minimumLength <= target.getTotalLetters()
+					||  dictionary[i].getTotalLetters() == target.getTotalLetters())
+				&& ( fewerOfEachLetter(target, dictionary[i]) )  )
+				candidates.add(dictionary[i]);
+		assert wellFormed();
+		return candidates.toArray(new Word[candidates.size()]);
+	}
+
+	/**
+	 * 
+	 * @param target
+	 * @param entry
+	 * @return
+	 */
+	private boolean fewerOfEachLetter(Word target, Word entry)
+	{
+		for (int i = 25; i >=0; i--)
+			if (entry.getLetterCount(i) > target.getLetterCount(i)) return false;
+		return true;
 	}
 
 	public boolean wellFormed() {

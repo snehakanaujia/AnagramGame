@@ -24,7 +24,8 @@ public class anagram {
 			minimumLength = Integer.parseInt(argv[1]);
 
 		// word filename is optional 3rd argument
-		AnagramList anagrams = new AnagramList( argv.length == 3 ? argv[2] : "words.txt", argv[0]);
+		WordList dictionary = new WordList( argv.length == 3 ? argv[2] : "words.txt");
+		AnagramList anagrams = new AnagramList( dictionary , argv[0]);
 		List<String> anagramList = anagrams.getAnagrams();
 
 		System.out.println("Candiate words:");
