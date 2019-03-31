@@ -9,10 +9,10 @@ import java.util.List;
  * words in the array.
  */
 public class WordList {
-	//Dictionary array that holds words
+	// Dictionary array that holds words
 	private Word[] dictionary = new Word[UsefulConstants.MAXWORDS];
 	
-	//Total words in the dictionary
+	// Total words in the dictionary
 	private int totalWords=0;
 
 	/**
@@ -31,6 +31,8 @@ public class WordList {
 	 */
 	private void readDict (String fileName) {
 		FileInputStream fis;
+		
+		// This try block ensures the file can be found and correctly read in.
 		try {
 			fis = new FileInputStream (fileName);
 			System.err.println ("reading dictionary...");
@@ -47,9 +49,11 @@ public class WordList {
 					buffer[i++] = (char) readChar;
 				}
 				s = new String(buffer,0,i);
+				// Stores word into dictionary array
 				dictionary[totalWords] = new Word(s);
 				totalWords++;
 			}
+			// Outputs how many words were read into the dictionary
 			System.err.println("main dictionary has " + totalWords + " entries.");
 			fis.close();
 		}
@@ -120,7 +124,7 @@ public class WordList {
 			return false;
 		}
 		
-		//Checks that the total word counter is correct (matches length of dictionary array)
+		//Checks that the total word counter is correct as long as it matches the length of the dictionary array
 		int counter = 0;
 		for(int i = 0; i < dictionary.length; i++) {
 			if(dictionary[i] != null) {
