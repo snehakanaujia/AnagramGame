@@ -3,6 +3,8 @@
  * @version Jan 7, 1996
  *
  * Constants used by the anagram program
+ * 
+ * Refactored by Cordelia Jones and Sneha Kanaujia
  */
 public class UsefulConstants {
 	public static final int MAXWORDS = 100000;
