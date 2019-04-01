@@ -124,13 +124,18 @@ public final class Word  {
 		//Checks if the totalLetters variable is equal to the total number of letters added up from letterCount??
 		int counter = 0;
 		for(int i = 0; i < letterCount.length; i++) {
+			// Ensures that letterCount has no negative values
+			if (letterCount[i] < 0) {
+				return false;
+			}
 			counter += letterCount[i];
 		}
 		if(totalLetters != counter) {
 			return false;
 		}
 		
-		if(counter > word.length()) {
+		// Checks if the sum of the letters in letterCount is not equal to the number of letters in the word
+		if(counter != word.length()) {
 			return false;
 		}
 
