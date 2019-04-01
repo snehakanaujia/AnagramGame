@@ -1,6 +1,8 @@
 /**
  * A model that holds a String as well as a record of which letters it has and
  * in what quantities.
+ * 
+ * Refactored by Cordelia Jones and Sneha Kanaujia
  */
 public final class Word  {
 	private final int letterCount[];  // count of each letter in the word
