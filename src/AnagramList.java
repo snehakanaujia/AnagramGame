@@ -2,7 +2,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * A list of anagrams of a word.
+ * Generates a List of anagrams for the target word from the words available in the dictionary.
+ * 
+ * Refactored by Cordelia Jones and Sneha Kanaujia
  */
 public class AnagramList{
 
