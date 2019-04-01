@@ -20,7 +20,7 @@ public final class Word  {
 		s = word.toLowerCase();
 		
 		// Initialize letterCount with 0's
-		letterCount =  = new int[26];
+		letterCount = new int[26];
 		
 		// Cycles through the word's possible letters backwards
 		for (int i = s.length()-1; i >= 0; i--) {
