@@ -8,7 +8,6 @@ public class AnagramList{
 
 	private final int minimumLength;
 	private String word, savedCandidates;
-	private WordList dictionary;
 	private List<String> anagrams;
 	private Word[] candidates;
 
