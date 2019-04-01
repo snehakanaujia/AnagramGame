@@ -173,17 +173,20 @@ public class AnagramList{
 
 	/**
 	 * Standard quicksort from any algorithm book
+	 * Puts words that don't have the least common letter on the left of
+	 * the array.
 	 * @param left
 	 * @param right
 	 * @param leastCommonLetter
 	 */
 	private void quickSort(int left, int right, int leastCommonLetter)
 	{
-		int i, last;
-		if (left >= right) return;
+		int last;
+		if (left >= right) 
+			return;
 		swap(left, (left+right)/2);
 		last = left;
-		for (i=left+1; i <=right; i++)  /* partition */
+		for (int i=left+1; i <=right; i++)  /* partition */
 			if (candidates[i].multiFieldCompare ( candidates[left], leastCommonLetter ) ==  -1 )
 				swap( ++last, i);
 
