@@ -18,7 +18,7 @@ public class WordList {
 
 	/**
 	 * WordList constructor that calls a method to read in a text file that has words to store in the dictionary array.
-	 * @param f is the name of file to be read in
+	 * @param fileName is the name of file to be read in
 	 */
 	public WordList(String fileName) {
 		readDict(fileName);
@@ -88,6 +88,7 @@ public class WordList {
 	 * Searches through the dictionary array of words and finds words that could be anagrams of the target/original word
 	 * @param target word that anagrams are being looked for
 	 * @param minimumLength that the candidate anagrams can be
+	 * @return array of anagram candidates
 	 */
 	public Word[] getPartialMatches(Word target, int minimumLength) {
 		List<Word> candidates = new LinkedList<>();
