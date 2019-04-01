@@ -129,7 +129,7 @@ public final class Word  {
 	 * @return returns true if class satisfies class invariants
 	 */
 	public boolean wellFormed() {
-		//Checks if the totalLetters variable is equal to the total number of letters added up from letterCount??
+		//Checks if the totalLetters variable is equal to the total number of letters added up from letterCount
 		int counter = 0;
 		for(int i = 0; i < letterCount.length; i++) {
 			// Ensures that letterCount has no negative values
@@ -141,9 +141,11 @@ public final class Word  {
 		if(totalLetters != counter) {
 			return false;
 		}
-		
-		// Checks if the sum of the letters in letterCount is not equal to the number of letters in the word
-		if(counter != word.length()) {
+		/*
+		 * The word can have characters that aren't letters, but total letters 
+		 * should not exceed word length.
+		 */
+		if(counter > word.length()) {
 			return false;
 		}
 
