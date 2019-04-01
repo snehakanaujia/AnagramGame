@@ -3,7 +3,7 @@
  * in what quantities.
  */
 public final class Word  {
-	private final int letterCount[] = new int[26];  // count of each letter in the word
+	private final int letterCount[];  // count of each letter in the word
 	private final int totalLetters;  // number of letters in the word
 	private final String word;  // the word
 
@@ -14,13 +14,17 @@ public final class Word  {
 	public Word(String s) { // construct an entry from a string
 		word = s;
 		int total = 0;
+		//Set the given word to lower case to for ease of comparison
 		s = word.toLowerCase();
 		
-		for (int i = 'a'; i <= 'z'; i++) letterCount[i-'a'] = 0;
+		// Initialize letterCount with 0's
+		letterCount =  = new int[26];
 		
-		int ch;
+		// Cycles through the word's possible letters backwards
 		for (int i = s.length()-1; i >= 0; i--) {
-			ch = s.charAt(i) - 'a';
+			// holds current letter/char
+			int ch = s.charAt(i) - 'a';
+			// Ensures the char is between a and z/is an alphabet letter
 			if (ch >= 0 && ch < 26) {
 				total++;
 				letterCount[ch]++;
