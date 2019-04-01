@@ -11,7 +11,7 @@ public final class Word  {
 
 	/**
 	 * Creates a new Word with the given String.
-	 * @param s
+	 * @param s is a string from which the word is constructed from
 	 */
 	public Word(String s) { // construct an entry from a string
 		word = s;
@@ -38,11 +38,13 @@ public final class Word  {
 	}
 
 	/**
-	 * @param letter to check for
-	 * @return True if the word contains the specified letter.
+	 * Checks if the word has the letter in question
+	 * @param letterIndex to check the letterCount array for
+	 * @return true if the word contains the specified letter and the value at the 
+	 * given index in letterCount is not equal to 0, false if not
 	 */
-	public boolean containsLetter(int j){
-		return letterCount[j] != 0;
+	public boolean containsLetter(int letterIndex){
+		return letterCount[letterIndex] != 0;
 	}
 
 	/**
@@ -50,8 +52,8 @@ public final class Word  {
 	 * first.
 	 * @param word the word to compare to
 	 * @param leastCommonLetter the letter to check for
-	 * @return 0 if the words are equal, < 0 if word is greater than this one,
-	 * > 0 if word is less than this one
+	 * @return 0 if the words are equal, -1 if word is greater than this one,
+	 * and 1 if word is less than this one
 	 */
 	public int multiFieldCompare(Word word, int leastCommonLetter)
 	{
@@ -94,12 +96,12 @@ public final class Word  {
 	}
 	
 	/**
-	 * Returns the number of instances of a particular letter
-	 * @param index
-	 * @return
+	 * Returns the number of instances of a particular letter in the word
+	 * @param letterIndex is the index of the to check the letterCount array for
+	 * @return the number of occurances of the given letter (index) in the word
 	 */
-	public int getLetterCount(int index) {
-		return letterCount[index];
+	public int getLetterCount(int letterIndex) {
+		return letterCount[letterIndex];
 	}
 	
 	/**
