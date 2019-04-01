@@ -138,36 +138,38 @@ public class AnagramList{
 	 * Sorts the candidate Words by the least common letter shared with the
 	 * target Word. 
 	 * @param word
-	 * @return
+	 * @return the starting index of words containing the least common letter
+	 * in the candidates array
 	 */
 	private int sortCandidates(Word word)
 	{
 		int[] MasterCount=new int[26];
-		int LeastCommonIndex=0, LeastCommonCount;
-		int i, j;
+		int leastCommonIndex=0, leastCommonCount;
 
-		for (j = 25; j >= 0; j--) MasterCount[j] = 0;
-		for (i = candidates.length-1; i >=0; i--)
-			for (j = 25; j >=0; j--)
+		// Get number of occurrences of each letter in all candidates 
+		for (int i = candidates.length-1; i >=0; i--)
+			for (int j = 25; j >=0; j--)
 				MasterCount[j] += candidates[i].getLetterCount(j);
 
-		LeastCommonCount = Integer.MAX_VALUE;
-		for (j = 25; j >= 0; j--)
-			if (    MasterCount[j] != 0
-				 && MasterCount[j] < LeastCommonCount
-				 && word.containsLetter(j)  ) {
-				LeastCommonCount = MasterCount[j];
-				LeastCommonIndex = j;
+		// Find least common letter among candidates
+		leastCommonCount = Integer.MAX_VALUE;
+		for (int j = 25; j >= 0; j--)
+			if ( MasterCount[j] != 0 && MasterCount[j] < leastCommonCount && word.containsLetter(j)  ) {
+				leastCommonCount = MasterCount[j];
+				leastCommonIndex = j;
 			}
 
-		quickSort(0, candidates.length-1, LeastCommonIndex );
+		// Sort candidates by least common letter
+		quickSort(0, candidates.length-1, leastCommonIndex );
 
+		// Find and return the index in the array at which the lcl appears
+		int i;
 		for (i = 0; i < candidates.length; i++)
-			if (candidates[i].containsLetter(LeastCommonIndex))
+			if (candidates[i].containsLetter(leastCommonIndex))
 				break;
 
 		return i;
-}
+	}
 
 	/**
 	 * Standard quicksort from any algorithm book
