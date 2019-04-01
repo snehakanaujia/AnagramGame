@@ -6,6 +6,8 @@ import java.util.List;
  * WordList takes a text file in the readDict method and stores and counts all the words
  * from that file in an array. It can return a word from the dictionary array give an index number, and the total number of
  * words in the array.
+ * 
+ * Refactored by Cordelia Jones and Sneha Kanaujia
  */
 public class WordList {
 	// Dictionary array that holds words
