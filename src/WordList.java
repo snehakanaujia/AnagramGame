@@ -6,6 +6,8 @@ import java.util.List;
  * WordList takes a text file in the readDict method and stores and counts all the words
  * from that file in an array. It can return a word from the dictionary array give an index number, and the total number of
  * words in the array.
+ * 
+ * Refactored by Cordelia Jones and Sneha Kanaujia
  */
 public class WordList {
 	// Dictionary array that holds words
@@ -16,7 +18,7 @@ public class WordList {
 
 	/**
 	 * WordList constructor that calls a method to read in a text file that has words to store in the dictionary array.
-	 * @param f is the name of file to be read in
+	 * @param fileName is the name of file to be read in
 	 */
 	public WordList(String fileName) {
 		readDict(fileName);
@@ -83,8 +85,10 @@ public class WordList {
 	}
 	
 	/**
-	 * 
-	 * @param target
+	 * Searches through the dictionary array of words and finds words that could be anagrams of the target/original word
+	 * @param target word that anagrams are being looked for
+	 * @param minimumLength that the candidate anagrams can be
+	 * @return array of anagram candidates
 	 */
 	public Word[] getPartialMatches(Word target, int minimumLength) {
 		List<Word> candidates = new LinkedList<>();
@@ -99,10 +103,10 @@ public class WordList {
 	}
 
 	/**
-	 * 
-	 * @param target
-	 * @param entry
-	 * @return
+	 * Ensures a potential candidate for the target word has the same or fewer number of letters as the original word
+	 * @param target word that anagrams are being looked for
+	 * @param entry is the potential candidate word
+	 * @return true if the entry word has the same or fewer number of letters as the original/target word
 	 */
 	private boolean fewerOfEachLetter(Word target, Word entry)
 	{

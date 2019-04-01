@@ -1,26 +1,32 @@
 /**
  * A model that holds a String as well as a record of which letters it has and
  * in what quantities.
+ * 
+ * Refactored by Cordelia Jones and Sneha Kanaujia
  */
 public final class Word  {
-	private final int letterCount[] = new int[26];  // count of each letter in the word
+	private final int letterCount[];  // count of each letter in the word
 	private final int totalLetters;  // number of letters in the word
 	private final String word;  // the word
 
 	/**
 	 * Creates a new Word with the given String.
-	 * @param s
+	 * @param s is a string from which the word is constructed from
 	 */
 	public Word(String s) { // construct an entry from a string
 		word = s;
 		int total = 0;
+		//Set the given word to lower case to for ease of comparison
 		s = word.toLowerCase();
 		
-		for (int i = 'a'; i <= 'z'; i++) letterCount[i-'a'] = 0;
+		// Initialize letterCount with 0's
+		letterCount = new int[26];
 		
-		int ch;
+		// Cycles through the word's possible letters backwards
 		for (int i = s.length()-1; i >= 0; i--) {
-			ch = s.charAt(i) - 'a';
+			// holds current letter/char
+			int ch = s.charAt(i) - 'a';
+			// Ensures the char is between a and z/is an alphabet letter
 			if (ch >= 0 && ch < 26) {
 				total++;
 				letterCount[ch]++;
@@ -32,11 +38,13 @@ public final class Word  {
 	}
 
 	/**
-	 * @param letter to check for
-	 * @return True if the word contains the specified letter.
+	 * Checks if the word has the letter in question
+	 * @param letterIndex to check the letterCount array for
+	 * @return true if the word contains the specified letter and the value at the 
+	 * given index in letterCount is not equal to 0, false if not
 	 */
-	public boolean containsLetter(int j){
-		return letterCount[j] != 0;
+	public boolean containsLetter(int letterIndex){
+		return letterCount[letterIndex] != 0;
 	}
 
 	/**
@@ -44,8 +52,8 @@ public final class Word  {
 	 * first.
 	 * @param word the word to compare to
 	 * @param leastCommonLetter the letter to check for
-	 * @return 0 if the words are equal, < 0 if word is greater than this one,
-	 * > 0 if word is less than this one
+	 * @return 0 if the words are equal, -1 if word is greater than this one,
+	 * and 1 if word is less than this one
 	 */
 	public int multiFieldCompare(Word word, int leastCommonLetter)
 	{
@@ -88,12 +96,12 @@ public final class Word  {
 	}
 	
 	/**
-	 * Returns the number of instances of a particular letter
-	 * @param index
-	 * @return
+	 * Returns the number of instances of a particular letter in the word
+	 * @param letterIndex is the index of the to check the letterCount array for
+	 * @return the number of occurances of the given letter (index) in the word
 	 */
-	public int getLetterCount(int index) {
-		return letterCount[index];
+	public int getLetterCount(int letterIndex) {
+		return letterCount[letterIndex];
 	}
 	
 	/**
@@ -124,13 +132,18 @@ public final class Word  {
 		//Checks if the totalLetters variable is equal to the total number of letters added up from letterCount??
 		int counter = 0;
 		for(int i = 0; i < letterCount.length; i++) {
+			// Ensures that letterCount has no negative values
+			if (letterCount[i] < 0) {
+				return false;
+			}
 			counter += letterCount[i];
 		}
 		if(totalLetters != counter) {
 			return false;
 		}
 		
-		if(counter > word.length()) {
+		// Checks if the sum of the letters in letterCount is not equal to the number of letters in the word
+		if(counter != word.length()) {
 			return false;
 		}
 

@@ -2,13 +2,20 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * A list of anagrams of a word.
+ * Generates a List of anagrams for the target word from the words available in the dictionary.
+ * 
+ * Refactored by Cordelia Jones and Sneha Kanaujia
  */
 public class AnagramList{
 
+	// Minimum length of a word
 	private final int minimumLength;
+	
+	// Variables to hold the word anagrams are being generated from as well as an anagram candidate variable
 	private String word, savedCandidates;
+	// Finalized list of anagrams that can be made from all the target word's letters
 	private List<String> anagrams;
+	// Array of candidate anagrams, or all the words that can be made from the letters of the given targetWord
 	private Word[] candidates;
 
 	/**
@@ -30,6 +37,8 @@ public class AnagramList{
 		/* Find anagrams */
 		int RootIndexEnd = sortCandidates(myAnagram);
 		findAnagrams(myAnagram, new String[UsefulConstants.MAXWORDLEN],  0, 0, RootIndexEnd);
+		// Checks that the candidates array is still well-formed
+		assert wellFormed();
 	}
 
 	/**
@@ -83,6 +92,9 @@ public class AnagramList{
 				}
 			}
 		}
+		
+		//Checks that the candidates array is still well-formed
+		assert wellFormed();
 	}
 
 	/**
@@ -130,31 +142,33 @@ public class AnagramList{
 	 */
 	private int sortCandidates(Word word)
 	{
-		int[] MasterCount=new int[26];
-		int LeastCommonIndex=0, LeastCommonCount;
-		int i, j;
-
-		for (j = 25; j >= 0; j--) MasterCount[j] = 0;
-		for (i = candidates.length-1; i >=0; i--)
-			for (j = 25; j >=0; j--)
-				MasterCount[j] += candidates[i].getLetterCount(j);
-
-		LeastCommonCount = Integer.MAX_VALUE;
-		for (j = 25; j >= 0; j--)
-			if (    MasterCount[j] != 0
-				 && MasterCount[j] < LeastCommonCount
-				 && word.containsLetter(j)  ) {
-				LeastCommonCount = MasterCount[j];
-				LeastCommonIndex = j;
+		// Keeps track of the frequency of each letter is in each word
+		int[] masterCount=new int[26];
+		// Keeps track of which index/letter in the array has the fewest letters
+		int leastcommonIndex=0, leastCommonCount = 30;
+		
+		// Goes through each candidate word
+		for (int i = candidates.length-1; i >=0; i--)
+			// Goes through each letter of the cadidate word
+			for (int j = 25; j >=0; j--) {
+				// Adds the candidate list letter counts to the masterCount
+				masterCount[j] += candidates[i].getLetterCount(j);
+				/* Checks if the letter of the word is in masterCount and is less than leastCommonCount and the
+				 * candidate word also has this letter */
+				if ( masterCount[j] != 0 && masterCount[j] < leastCommonCount && word.containsLetter(j)  ) {
+					// updates the leastCommonCount with the lower masterCount value
+					leastCommonCount = masterCount[j];
+					/* Updates the leastCommonIndex to the index in leastCommonCount that has the least 
+					commonly used letter */
+					leastcommonIndex = j;
+				}
 			}
+		// Sorts the candidates
+		quickSort(0, candidates.length-1, leastcommonIndex );
 
-		quickSort(0, candidates.length-1, LeastCommonIndex );
-
-		for (i = 0; i < candidates.length; i++)
-			if (candidates[i].containsLetter(LeastCommonIndex))
-				break;
-
-		return i;
+		// Checks that the candidates array is still well formed after sorting
+		assert wellFormed();
+		return leastcommonIndex;
 	}
 
 	/**
@@ -194,5 +208,25 @@ public class AnagramList{
 	 */
 	public List<String> getAnagrams() {
 		return anagrams;
+	}
+	
+	/**
+	 * A well formed AnagramList must have:
+	 * 	1) An instantiated candidate list
+	 * 	2) A minimum word length of more than 0
+	 * @return true if AnagramList meets the well formed rules and false if not
+	 */
+	public boolean wellFormed() {
+		// Checks that the candidates array length is not null
+		if (candidates == null) {
+			return false;
+		}
+		
+		// Checks that minimum word length is greater than 0
+		if (!(minimumLength > 0)) {
+			return false;
+		}
+
+		return true;
 	}
 }
