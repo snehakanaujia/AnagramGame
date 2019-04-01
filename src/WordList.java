@@ -83,8 +83,9 @@ public class WordList {
 	}
 	
 	/**
-	 * 
-	 * @param target
+	 * Searches through the dictionary array of words and finds words that could be anagrams of the target/original word
+	 * @param target word that anagrams are being looked for
+	 * @param minimumLength that the candidate anagrams can be
 	 */
 	public Word[] getPartialMatches(Word target, int minimumLength) {
 		List<Word> candidates = new LinkedList<>();
@@ -99,10 +100,10 @@ public class WordList {
 	}
 
 	/**
-	 * 
-	 * @param target
-	 * @param entry
-	 * @return
+	 * Ensures a potential candidate for the target word has the same or fewer number of letters as the original word
+	 * @param target word that anagrams are being looked for
+	 * @param entry is the potential candidate word
+	 * @return true if the entry word has the same or fewer number of letters as the original/target word
 	 */
 	private boolean fewerOfEachLetter(Word target, Word entry)
 	{
