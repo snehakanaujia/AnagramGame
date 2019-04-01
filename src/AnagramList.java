@@ -38,6 +38,8 @@ public class AnagramList{
 		/* Find anagrams */
 		int RootIndexEnd = sortCandidates(myAnagram);
 		findAnagrams(myAnagram, new String[UsefulConstants.MAXWORDLEN],  0, 0, RootIndexEnd);
+		// Checks that the candidates array is still well-formed
+		assert wellFormed();
 	}
 
 	/**
@@ -91,6 +93,9 @@ public class AnagramList{
 				}
 			}
 		}
+		
+		//Checks that the candidates array is still well-formed
+		assert wellFormed();
 	}
 
 	/**
@@ -162,6 +167,8 @@ public class AnagramList{
 		// Sorts the candidates
 		quickSort(0, candidates.length-1, leastcommonIndex );
 
+		// Checks that the candidates array is still well formed after sorting
+		assert wellFormed();
 		return leastcommonIndex;
 	}
 
@@ -202,5 +209,25 @@ public class AnagramList{
 	 */
 	public List<String> getAnagrams() {
 		return anagrams;
+	}
+	
+	/**
+	 * A well formed AnagramList must have:
+	 * 	1) An instantiated candidate list
+	 * 	2) A minimum word length of more than 0
+	 * @return true if AnagramList meets the well formed rules and false if not
+	 */
+	public boolean wellFormed() {
+		// Checks that the candidates array length is not null
+		if (candidates == null) {
+			return false;
+		}
+		
+		// Checks that minimum word length is greater than 0
+		if (!(minimumLength > 0)) {
+			return false;
+		}
+
+		return true;
 	}
 }
