@@ -4,6 +4,8 @@ import java.util.List;
  * Usage: java Anagram string [[min-len] wordfile] Java Anagram program, Peter
  * van der Linden Jan 7, 1996. Feel free to pass this program around, as long
  * as this header stays intact.
+ * 
+ * Refactored by Cordelia Jones and Sneha Kanaujia
  */
 
 /**
